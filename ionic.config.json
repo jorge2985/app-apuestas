@@ -1,0 +1,7 @@
+{
+  "name": "Apuestas",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,29 @@
+<ion-header [translucent]="false">
+  <ion-toolbar>
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let item of listaService.listas">
+    <ion-card-header>
+      <ion-card-title>
+        {{ item.titulo }}
+      </ion-card-title>
+      <ion-card-subtitle>Subtítulo de la card</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ item.descripcion }}
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" (click)="AgregarApuesta()">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
