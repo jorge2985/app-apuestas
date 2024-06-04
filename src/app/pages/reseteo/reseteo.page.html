@@ -1,0 +1,30 @@
+<app-header botonVolver="/login" title="Recuperar cuenta"></app-header>
+
+<ion-content>
+
+  <div>
+    <!-- Utiliza la variable 'form' que contiene el objeto FormGroup definida en registro.page.ts -->
+    <form [formGroup]="form" (ngSubmit)="enviar()" (keypress.enter)="enviar()">
+
+      <p class="ion-text-center">Recibirás un correo para restablecer tu contraseña</p>
+
+      <!-- INPUT DE CORREO -->
+      <!-- Crea un componente input con las variables definidas en custom-input.component.ts -->
+      <app-custom-input autocompletar="email" icono="mail-outline" [control]="form.controls.correo" tipo="email"
+        etiqueta="Correo"></app-custom-input>
+
+      <!-- Verifica que el correo sea valido y que el campo este completo -->
+      <div class="validador" *ngIf="form.controls.correo.errors && form.controls.correo.touched">
+        <div *ngIf="form.controls.correo.errors?.['required']">Es requerido el correo</div>
+        <div *ngIf="form.controls.correo.errors?.['email']">Ingrese un correo válido</div>
+      </div>
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        Recuperar
+        <ion-icon slot="start" name="arrow-forward"></ion-icon>
+      </ion-button>
+
+    </form>
+  </div>
+
+</ion-content>

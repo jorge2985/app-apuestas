@@ -1,0 +1,16 @@
+<ion-item class="input" lines="none">
+  <ion-icon color="dark" *ngIf="icono" slot="start" [name]="icono"></ion-icon>
+
+  <ion-input
+  [type]="tipo"
+  [autocomplete]="autocompletar"
+  [label]="etiqueta"
+  [formControl]="control"
+  labelPlacement="floating"
+  ></ion-input>
+
+  <ion-button *ngIf="esPassword" (click)="mostrarOcultarPass()" slot="end" fill="clear" shape="round">
+    <ion-icon slot="icon-only" [name]="oculta ? 'eye-outline' : 'eye-off-outline' "></ion-icon>
+  </ion-button>
+
+</ion-item>

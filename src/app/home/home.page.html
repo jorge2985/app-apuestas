@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Eventos Deportivos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let event of eventos">
+      <ion-label>
+        <pre>{{ event | json }}</pre>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

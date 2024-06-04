@@ -1,0 +1,47 @@
+<app-header botonVolver="/login" title="Registro"></app-header>
+
+<ion-content>
+
+  <div>
+    <!-- Utiliza la variable 'form' que contiene el objeto FormGroup definida en registro.page.ts -->
+    <form [formGroup]="form" (ngSubmit)="enviar()" (keypress.enter)="enviar()">
+
+      <!-- *********** NOMBRE *********** -->
+      <!-- Crea un componente input con las variables definidas en custom-input.component.ts -->
+      <app-custom-input autocompletar="name" icono="person-outline" [control]="form.controls.nombre" tipo="text"
+        etiqueta="Nombre"></app-custom-input>
+
+      <!-- Verifica que el correo sea valido y que el campo este completo -->
+      <div class="validador" *ngIf="form.controls.nombre.errors && form.controls.nombre.touched">
+        <div *ngIf="form.controls.nombre.errors?.['required']">Es requerido el nombre</div>
+        <div *ngIf="form.controls.nombre.errors?.['name']">El nombre debe tener un mínimo de 3 carácteres</div>
+      </div>
+
+      <!-- *********** CORREO *********** -->
+      <!-- Crea un componente input con las variables definidas en custom-input.component.ts -->
+      <app-custom-input autocompletar="email" icono="mail-outline" [control]="form.controls.correo" tipo="email"
+        etiqueta="Correo"></app-custom-input>
+
+      <!-- Verifica que el correo sea valido y que el campo este completo -->
+      <div class="validador" *ngIf="form.controls.correo.errors && form.controls.correo.touched">
+        <div *ngIf="form.controls.correo.errors?.['required']">Es requerido el correo</div>
+        <div *ngIf="form.controls.correo.errors?.['email']">Ingrese un correo válido</div>
+      </div>
+
+      <!-- *********** CONTRASEÑA *********** -->
+      <app-custom-input icono="lock-closed-outline" [control]="form.controls.password" tipo="password"
+        etiqueta="Contraseña"></app-custom-input>
+
+      <!-- Valida que se escriba enS el campo de contraseña -->
+      <div class="validador" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']">Es requerido la contraseña</div>
+      </div>
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        Registrarse
+        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+      </ion-button>
+
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,60 @@
+<app-header title="Ingreso"></app-header>
+
+<ion-content>
+
+  <div>
+    <!-- Utiliza la variable 'form' que contiene el objeto FormGroup definida en registro.page.ts -->
+    <form [formGroup]="form" (ngSubmit)="enviar()" (keypress.enter)="enviar()">
+
+      <!-- INPUT DE CORREO -->
+      <!-- Crea un componente input con las variables definidas en custom-input.component.ts -->
+      <app-custom-input autocompletar="email" icono="mail-outline" [control]="form.controls.correo" tipo="email"
+        etiqueta="Correo"></app-custom-input>
+
+      <!-- Verifica que el correo sea valido y que el campo este completo -->
+      <div class="validador" *ngIf="form.controls.correo.errors && form.controls.correo.touched">
+        <div *ngIf="form.controls.correo.errors?.['required']">Es requerido el correo</div>
+        <div *ngIf="form.controls.correo.errors?.['email']">Ingrese un correo válido</div>
+      </div>
+
+
+      <!-- INPUT DE CONTRASEÑA -->
+      <app-custom-input icono="lock-closed-outline" [control]="form.controls.password" tipo="password"
+        etiqueta="Contraseña"></app-custom-input>
+
+      <!-- Valida que se escriba el campo de contraseña -->
+      <div class="validador" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']">Es requerida la contraseña</div>
+      </div>
+
+      <!-- Reseteo de contraseña -->
+      <p routerLink="/reseteo" class="ion-text-start">¿Olvidaste tu contraseña?</p>
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        Ingresar
+        <ion-icon slot="start" name="log-in-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button routerLink="/registro" expand="block" fill="outline">
+        Registrar
+        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+      </ion-button>
+
+    </form>
+  </div>
+
+  <!--
+  <form>
+    <ion-item>
+      <ion-label position="floating">Correo electrónico</ion-label>
+      <ion-input type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+     <ion-button expand="block" routerLink="/user-form">Registrar</ion-button> 
+  </form>
+-->
+
+</ion-content>
