@@ -2,8 +2,17 @@
   <ion-toolbar color="dark">
 
     <ion-buttons slot="start">
+
+      <!-- BOTÓN VOLVER -->
       <ion-back-button *ngIf="botonVolver" [defaultHref]="botonVolver"></ion-back-button>
+
+      <!-- BOTÓN CERRAR MODAL -->
+      <ion-button (click)="despedirModal()" *ngIf="esModal">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
+
+
 
     <ion-title>
       <strong>{{title}}</strong>

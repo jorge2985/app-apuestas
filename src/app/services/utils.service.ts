@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController, ToastOptions } from '@ionic/angular';
+import { LoadingController, ModalController, ModalOptions, ToastController, ToastOptions } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,7 @@ export class UtilsService {
 
   controlCarga = inject(LoadingController);
   controlAviso = inject(ToastController);
+  controlModal = inject(ModalController)
   enrutador = inject(Router)
   
   constructor() { }
@@ -40,5 +41,17 @@ export class UtilsService {
     return JSON.parse(localStorage.getItem(llave))
   }
 
+  // *********** Modal ***********
+  async presentarModal(opciones: ModalOptions) {
+    const modal = await this.controlModal.create(opciones);
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) return data;
+  }
+
+  despedirModal(data?: any) {
+    return this.controlModal.dismiss(data);
+  }
 
 }

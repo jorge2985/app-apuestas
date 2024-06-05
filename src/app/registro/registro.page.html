@@ -14,7 +14,7 @@
       <!-- Verifica que el correo sea valido y que el campo este completo -->
       <div class="validador" *ngIf="form.controls.nombre.errors && form.controls.nombre.touched">
         <div *ngIf="form.controls.nombre.errors?.['required']">Es requerido el nombre</div>
-        <div *ngIf="form.controls.nombre.errors?.['name']">El nombre debe tener un mínimo de 3 carácteres</div>
+        <div *ngIf="form.controls.nombre.errors?.['minLength']">El nombre debe tener un mínimo de 3 carácteres</div>
       </div>
 
       <!-- *********** CORREO *********** -->

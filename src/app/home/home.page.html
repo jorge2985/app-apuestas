@@ -1,15 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Eventos Deportivos</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Inicio"></app-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let event of eventos">
-      <ion-label>
-        <pre>{{ event | json }}</pre>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-button (click)="deslogueo()">Cerrar sesión</ion-button>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-card class="tarjeta" *ngFor="let event of eventos">
+    <img alt="Silhouette of mountains" src={{event.strHomeTeamBadge}} />
+    <ion-card-header>
+      <ion-card-title>{{ event.strEvent }}</ion-card-title>
+      <ion-card-subtitle>{{ event.strLeague }}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ event.strFilename }}
+    </ion-card-content>
+    <ion-card-content class="ion-text-right">
+      <ion-button (click)="agregarActApuesta()" fill="outline">Apostar</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
