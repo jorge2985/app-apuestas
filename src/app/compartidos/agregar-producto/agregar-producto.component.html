@@ -1,4 +1,4 @@
-<app-header [esModal]="true" title="Agregar apuesta"></app-header>
+<app-header [esModal]="true" [title]="apuesta ? 'Actualizar apuesta' : 'Agregar apuesta' "></app-header>
 <ion-content>
 
     <!-- Utiliza la variable 'form' que contiene el objeto FormGroup definida en registro.page.ts -->
@@ -29,7 +29,7 @@
         </div>
 
         <ion-button class="ion-margin" type="submit" [disabled]="form.invalid">
-            Agregar apuesta
+            {{ apuesta ? 'Actualizar apuesta' : 'Agregar apuesta' }}
             <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
         </ion-button>
 

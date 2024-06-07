@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'reseteo',
     loadChildren: () => import('./pages/reseteo/reseteo.module').then( m => m.ReseteoPageModule)
   },
+  {
+    path: 'apuestas-usuario',
+    loadChildren: () => import('./pages/apuestas-usuario/apuestas-usuario.module').then( m => m.ApuestasUsuarioPageModule)
+  },
 ];
 
 @NgModule({

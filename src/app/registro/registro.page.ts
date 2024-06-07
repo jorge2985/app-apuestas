@@ -35,15 +35,14 @@ export class RegistroPage implements OnInit {
       await cargando.present();
 
       // Verifica los datos del logueo con el usuario creado en Firebase
-      this.servicioFirebase.registroUsuario(this.form.value as Usuario)
-        .then(async respuesta => {
+      this.servicioFirebase.registroUsuario(this.form.value as Usuario).then(async respuesta => {
 
           await this.servicioFirebase.actualizarUsuario(this.form.value.nombre);
           
           let usID = respuesta.user.uid;
           this.form.controls.usuarioID.setValue(usID);
 
-          this.cambiarInfoUsuario(usID);
+          this.cargaInfoUsuario(usID);
 
         })
 
@@ -66,7 +65,7 @@ export class RegistroPage implements OnInit {
     }
   }
 
-  async cambiarInfoUsuario(usuarioID: string) {
+  async cargaInfoUsuario(usuarioID: string) {
     if (this.form.valid) {
 
       // almacena en 'cargando' el metodo 'cargando()' de utils.service.ts

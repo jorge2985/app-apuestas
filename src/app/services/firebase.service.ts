@@ -3,8 +3,11 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { Usuario } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { setDoc, getFirestore, doc, getDoc } from '@angular/fire/firestore';
+import { setDoc, getFirestore, doc, getDoc, addDoc, collection, collectionData, query } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { getStorage, uploadString, ref, getDownloadURL } from 'firebase/storage';
+import { updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +39,7 @@ export class FirebaseService {
   }
 
   // *********** Actualizar usuario ***********
-  // obtiene el nombre del usuario y actualiza los datos en la base de Firebase
+  // envia como parametro el nombre del usuario para actualizarlos
   actualizarUsuario(displayName: string) {
     return updateProfile(getAuth().currentUser, { displayName });
   }
@@ -56,16 +59,33 @@ export class FirebaseService {
 
   // *********** BASE DE DATOS ***********
 
-  // *********** Actualiza el documento ***********
+  // *********** Obtiene documento con datos de apuestas de una colección ***********
+  obtenerApuesta(direccion: string, pedidoColeccion?: any) {
+    const referencia = collection(getFirestore(), direccion);
+    return collectionData(query(referencia, pedidoColeccion), { idField: 'id' });
+  }
+
+  // *********** Crea el documento con los datos del usuario ***********
   // crea un documento con los datos del usuario, la 'dirección' es el path
   crearDocumento(direccion: string, data: any) {
     return setDoc(doc(getFirestore(), direccion), data);
+  }
+
+  // *********** Actualiza el documento de la apuesta ***********
+  // actualiza un documento ya existente en Firebase que contiene los datos de la apuesta
+  actualizarApuesta(direccion: string, data: any) {
+    return updateDoc(doc(getFirestore(), direccion), data);
   }
 
   // *********** Obtener el documento ***********
   // obtiene un documento con los datos del usuario
   async obtenerDocumento(direccion: string) {
     return (await getDoc(doc(getFirestore(), direccion))).data();
+  }
+
+  // crea un documento con los datos de la apuesta. El ID lo crea la librería 'collection'
+  crearApuesta(direccion: string, data: any) {
+    return addDoc(collection(getFirestore(), direccion), data);
   }
 
 }
