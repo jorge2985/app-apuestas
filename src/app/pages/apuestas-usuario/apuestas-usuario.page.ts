@@ -7,6 +7,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { orderBy } from 'firebase/firestore';
 import { UsuarioService } from '../../services/usuario.service';
 import { User } from 'firebase/auth';
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+
 
 @Component({
   selector: 'app-apuestas-usuario',
@@ -15,27 +17,46 @@ import { User } from 'firebase/auth';
 })
 export class ApuestasUsuarioPage implements OnInit {
 
-
   servicioFirebase = inject(FirebaseService);
   utilidadesServ = inject(UtilsService);
   datoUsuario = inject(UsuarioService);
+
+  uid: string | null = null;
 
   constructor() { }
 
   apuestas: Apuesta[] = [];
   cargando: boolean = false;
 
-
   ngOnInit() {
+    this.getUserId()
+  }
 
+  // *********** Obtener el ID del usuario desde Firebase ***********
+  // almacena en auth la respuesta de la función getAuth() y luego se la pasa como parámetro
+  // a onAuthStateChanged para que devuelva el ID del usuario en Firebase.
+  async getUserId(): Promise<void> {
+    const auth = getAuth();
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.uid = user.uid;
+          resolve();
+        } else {
+          this.uid = null;
+          resolve();
+        }
+      });
+    });
   }
 
   // Devuelve los datos del usuario guardados en el local Storage con la clave 'usuario'
-  usuario(): Usuario {
+  /* usuario(): Usuario {
     return this.utilidadesServ.obtenerDeLocalStorage('usuario');
-  }
+  } */
 
   ionViewWillEnter() {
+    // Se ejecuta la función cuando se carga la visualización de la pantalla
     this.obtenerApuesta();
   }
 
@@ -53,34 +74,9 @@ export class ApuestasUsuarioPage implements OnInit {
     return this.apuestas.reduce((indice, apuesta) => indice + apuesta.importe, 0);
   }
 
-
-  // *********** Obtener el ID del usuario desde Firebase ***********
-  /*
-  async obtenerDatosUsuario() {
-    const autenticado = this.servicioFirebase.obtenerAutenticacion();
-    const usuarioActual = autenticado.currentUser;
-
-    if (true) {
-       const usuarioData: Usuario = {
-        usuarioID: usuarioActual.uid,
-        correo: usuarioActual.email,
-        nombre: usuarioActual.displayName,
-        password: '',
-        imagen: ''
-      } 
-
-      this.datoUsuario.setearUsuario(usuarioActual);
-      console.log(usuarioActual)
-    } else {
-      console.log('No hay usuario autenticado');
-    }
-  }
-*/
-
   // *********** Obtener las apuestas del usuario ***********
   obtenerApuesta() {
-    let direccion = `usuario/${this.usuario().usuarioID}/apuestas`;
-    console.log(this.usuario().usuarioID)
+    let direccion = `usuario/${this.uid}/apuestas`;
 
     this.cargando = true;
 
@@ -136,7 +132,7 @@ export class ApuestasUsuarioPage implements OnInit {
   async eliminarApuesta(apuesta: Apuesta) {
 
     // ruta que contiene las apuestas del usuario
-    let direccion = `usuario/${this.usuario().usuarioID}/apuestas/${apuesta.id}`;
+    let direccion = `usuario/${this.uid}/apuestas/${apuesta.id}`;
 
     // almacena en 'cargando' el metodo 'cargando()' de utils.service.ts
     const cargando = await this.utilidadesServ.cargando();

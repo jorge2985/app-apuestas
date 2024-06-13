@@ -4,7 +4,6 @@ import { FirebaseService } from '../services/firebase.service';
 import { UtilsService } from '../services/utils.service';
 import { AgregarProductoComponent } from '../compartidos/agregar-producto/agregar-producto.component';
 import { ModalController } from '@ionic/angular';
-import { ApuestasUsuarioPage } from '../pages/apuestas-usuario/apuestas-usuario.page';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +35,7 @@ export class HomePage implements OnInit {
     const apiUrl = 'https://www.thesportsdb.com/api/v1/json/3/searchevents.php?e=&s=2023-2024'
     this.http.get(apiUrl).subscribe((data: any) => {
       const eventosFiltrados = data.event.filter(
-        (evento: any) => evento.strStatus === 'Not Started' && evento.strSport === 'Soccer'
+        (evento: any) => evento.strStatus === 'Time to be defined' && evento.strSport === 'Soccer'
       );
 
       this.eventos = eventosFiltrados;

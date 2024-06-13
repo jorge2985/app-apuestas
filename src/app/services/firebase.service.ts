@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
+import { onAuthStateChanged, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { Usuario } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { setDoc, getFirestore, doc, getDoc, addDoc, collection, collectionData, query, deleteDoc } from '@angular/fire/firestore';
@@ -8,6 +8,7 @@ import { UtilsService } from './utils.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { getStorage, uploadString, ref, getDownloadURL } from 'firebase/storage';
 import { updateDoc } from 'firebase/firestore';
+
 
 @Injectable({
   providedIn: 'root'

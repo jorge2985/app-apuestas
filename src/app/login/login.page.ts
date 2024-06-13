@@ -85,7 +85,7 @@ export class LoginPage implements OnInit {
       this.servicioFirebase.obtenerDocumento(direccion).then((usuario: Usuario) => {
 
         // guarda la información del usuario en el Local Storage
-        this.servicioUtilidades.guardarEnLocalStorage('usuario', usuario);
+        // this.servicioUtilidades.guardarEnLocalStorage('usuario', usuario);
 
         // redirige al usuario a la home
         this.servicioUtilidades.linkEnrutador('/home');

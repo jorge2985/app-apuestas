@@ -1,7 +1,13 @@
 export interface Apuesta {
-    nombre: string,
     id: number,
+    nombre: string,
     strLeague: string,
     strEvent: string,
-    importe: number
+    idEvent: string,
+    strSport: string,
+    strTimestamp: Date,
+    strAwayTeam: string,
+    strHomeTeam: string,
+    importe: number,
+    equipoSeleccionado: string,
 }

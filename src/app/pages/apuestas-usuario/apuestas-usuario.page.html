@@ -23,7 +23,10 @@
     <ion-item-sliding *ngFor="let ap of apuestas">
       <ion-item>
         <ion-label>
-          <div class="nombre">{{ ap.nombre }}</div>
+          <p>Apostaste al equipo:</p>
+          <div class="nombre">
+            <ion-chip color="tertiary">{{ ap.equipoSeleccionado }}</ion-chip>
+          </div>
         </ion-label>
 
         <ion-label>
