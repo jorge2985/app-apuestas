@@ -1,6 +1,8 @@
 <app-header [esModal]="true" [title]="apuesta ? 'Actualizar apuesta' : 'Agregar apuesta' "></app-header>
 <ion-content>
 
+    <h5>{{ apuesta ? '' : evento.strEvent }}</h5>
+
     <!-- Utiliza la variable 'form' que contiene el objeto FormGroup definida en registro.page.ts -->
     <form [formGroup]="form" class="ion-padding ion-text-center" (ngSubmit)="enviar()" (keypress.enter)="enviar()">
 
@@ -16,10 +18,16 @@
             <div *ngIf="form.controls.nombre.errors?.['name']">El nombre debe tener un mínimo de 3 carácteres</div>
         </div>
 
+        <!-- LEAGUE -->
+        <app-custom-input [control]="form.controls.strLeague" tipo="text" [etiqueta]="ligaLabel"></app-custom-input>
+
+        <!-- EVENT -->
+        <app-custom-input [control]="form.controls.strEvent" tipo="text" [etiqueta]="eventoLabel"></app-custom-input>
+
         <!-- *********** IMPORTE *********** -->
         <!-- Crea un componente input con las variables definidas en custom-input.component.ts -->
-        <app-custom-input [control]="form.controls.importe" tipo="number"
-            etiqueta="Importe"></app-custom-input>
+        <app-custom-input [control]="form.controls.importe" tipo="number" etiqueta="Importe"
+            (ionInput)="convierteNumero()"></app-custom-input>
 
         <!-- VALIDADORES -->
         <!-- Verifica que el correo sea valido y que el campo este completo -->

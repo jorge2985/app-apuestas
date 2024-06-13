@@ -6,6 +6,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgregarProductoComponent } from './agregar-producto/agregar-producto.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 
@@ -14,14 +15,16 @@ import { AgregarProductoComponent } from './agregar-producto/agregar-producto.co
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
-    AgregarProductoComponent
+    AgregarProductoComponent,
+    MenuComponent
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     ReactiveFormsModule,
-    AgregarProductoComponent
+    AgregarProductoComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,

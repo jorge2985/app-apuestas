@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from '../services/firebase.service';
 import { Usuario } from '../models/user.model';
 import { UtilsService } from '../services/utils.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,11 @@ export class LoginPage implements OnInit {
     password: new FormControl('', [Validators.required])
   })
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
   servicioFirebase = inject(FirebaseService);
-  servicioUtilidades = inject(UtilsService)
+  servicioUtilidades = inject(UtilsService);
+  datoUsuario = inject(UsuarioService);
 
   ngOnInit() {
   }
@@ -32,10 +34,21 @@ export class LoginPage implements OnInit {
       const cargando = await this.servicioUtilidades.cargando();
       await cargando.present();
 
-      // Verifica los datos del logueo con el usuario creado en Firebase
-      this.servicioFirebase.logueo(this.form.value as Usuario).then(respuesta => {
+      const usuarioData = {
+        correo: this.form.controls.correo.value,
+        password: this.form.controls.password.value
+      };
 
-        // obtiene los datos del usuario
+      // Verifica los datos del logueo con el usuario creado en Firebase
+      // this.servicioFirebase.logueo(this.form.value as Usuario).then(respuesta => {
+      this.servicioFirebase.logueo(usuarioData).then(respuesta => {
+
+        // Almacena la respuesta en el servicio UsuarioService para uilizarlo
+        // en otros componentes y no depender de LocalSotrage
+        this.datoUsuario.setearUsuario(respuesta.user);
+
+        // obtiene los datos del usuario y pasa como parametros el ID del usuario
+        // según las credenciales de Firebase
         this.obtenerInfoUsuario(respuesta.user.uid);
 
       })

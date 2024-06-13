@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { UsuarioFormPageRoutingModule } from './usuario-form-routing.module';
 
 import { UsuarioFormPage } from './usuario-form.page';
+import { CompartidosModule } from '../compartidos/compartidos.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UsuarioFormPageRoutingModule
+    UsuarioFormPageRoutingModule,
+    CompartidosModule
   ],
   declarations: [UsuarioFormPage]
 })

@@ -1,4 +1,5 @@
 <ion-header class="ion-no-border">
+
   <ion-toolbar color="dark">
 
     <ion-buttons slot="start">
@@ -7,12 +8,14 @@
       <ion-back-button *ngIf="botonVolver" [defaultHref]="botonVolver"></ion-back-button>
 
       <!-- BOTÓN CERRAR MODAL -->
-      <ion-button (click)="despedirModal()" *ngIf="esModal">
+      <ion-button (click)="cierraModal()" *ngIf="esModal">
         <ion-icon name="close-circle-outline"></ion-icon>
       </ion-button>
+
+      <ion-menu-button *ngIf="mostrarMenu" menu="menu-contenido"></ion-menu-button>
+      <!-- <ion-menu-button></ion-menu-button> -->
+
     </ion-buttons>
-
-
 
     <ion-title>
       <strong>{{title}}</strong>

@@ -1,0 +1,41 @@
+
+<ion-menu contentId="menu-contenido" menuID="menu-contenido" side="start">
+  <app-header title="Menu"></app-header>
+  <ion-content class="ion-text-center">
+
+    <ion-icon class="icono-avatar" name="person-circle-outline"></ion-icon>
+
+    <!-- <ion-avatar>
+      <img *ngIf="usuario?.imagen" [src]="usuario?.imagen" />
+      <ion-icon *ngIf="!usuario?.imagen" name="person-circle-outline"></ion-icon>
+    </ion-avatar> -->
+    <h4>{{usuario()?.nombre}}</h4>
+
+    <!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of paginas">
+      <ion-item [ngClass]="{'active': dirreccionActual === p.url}" routerLink="p.url" routerDirection="root" detail>
+        <ion-icon slot="start" [name]="p.icon"></ion-icon>
+        <ion-label>{{p.titulo}}</ion-label>
+      </ion-item>
+    </ion-menu-toggle> -->
+    <ion-menu-toggle auto-hide="false">
+      <ion-item (click)="inicio()" detail>Inicio
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+      </ion-item>
+      <ion-item (click)="perfil()" detail>Perfil
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-content>
+
+  <ion-footer class="ion-no-border safe-p-bottom">
+    <ion-menu-toggle auto-hide="false">
+      <ion-item (click)="deslogueo()" lines="none">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        <ion-label>Cerrar sesión</ion-label>
+      </ion-item>
+    </ion-menu-toggle>
+  </ion-footer>
+
+</ion-menu>
+
+<ion-router-outlet id="menu-contenido" main></ion-router-outlet>

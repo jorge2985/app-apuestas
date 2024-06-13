@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { Usuario } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { setDoc, getFirestore, doc, getDoc, addDoc, collection, collectionData, query } from '@angular/fire/firestore';
+import { setDoc, getFirestore, doc, getDoc, addDoc, collection, collectionData, query, deleteDoc } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { getStorage, uploadString, ref, getDownloadURL } from 'firebase/storage';
@@ -14,8 +14,9 @@ import { updateDoc } from 'firebase/firestore';
 })
 export class FirebaseService {
 
-  autenticacion =  inject(AngularFireAuth);
+  autenticacion = inject(AngularFireAuth);
   firestore = inject(AngularFirestore);
+  storage = inject(AngularFireStorage);
   utilServc = inject(UtilsService);
 
   constructor() { }
@@ -28,7 +29,7 @@ export class FirebaseService {
 
   // *********** Logueo ***********
   // obtiene como parametros los datos enviados por el formulario y los valida con Firebase
-  logueo(usuario: Usuario) {
+  logueo(usuario: any) {
     return signInWithEmailAndPassword(getAuth(), usuario.correo, usuario.password);
   }
 
@@ -39,7 +40,7 @@ export class FirebaseService {
   }
 
   // *********** Actualizar usuario ***********
-  // envia como parametro el nombre del usuario para actualizarlos
+  // envia como parametro el nombre del usuario para actualizarlos en Firebase
   actualizarUsuario(displayName: string) {
     return updateProfile(getAuth().currentUser, { displayName });
   }
@@ -62,7 +63,7 @@ export class FirebaseService {
   // *********** Obtiene documento con datos de apuestas de una colección ***********
   obtenerApuesta(direccion: string, pedidoColeccion?: any) {
     const referencia = collection(getFirestore(), direccion);
-    return collectionData(query(referencia, pedidoColeccion), { idField: 'id' });
+    return collectionData(query(referencia, ...pedidoColeccion), { idField: 'id' });
   }
 
   // *********** Crea el documento con los datos del usuario ***********
@@ -77,15 +78,35 @@ export class FirebaseService {
     return updateDoc(doc(getFirestore(), direccion), data);
   }
 
-  // *********** Obtener el documento ***********
+  // *********** Elimina el documento de la apuesta ***********
+  // elimina un documento ya existente en Firebase que contiene los datos de la apuesta
+  eliminarApuesta(direccion: string) {
+    return deleteDoc(doc(getFirestore(), direccion));
+  }
+
+  // *********** Obtener el documento del usuario ***********
   // obtiene un documento con los datos del usuario
   async obtenerDocumento(direccion: string) {
     return (await getDoc(doc(getFirestore(), direccion))).data();
   }
 
+  // *********** Creación del documento con la apuesta ***********
   // crea un documento con los datos de la apuesta. El ID lo crea la librería 'collection'
   crearApuesta(direccion: string, data: any) {
     return addDoc(collection(getFirestore(), direccion), data);
+  }
+
+
+  // *********** ALMACENAMIENTO ***********
+
+  // *********** Subir imagen ***********
+  // obtiene una dirección o path en la que se guardará la imagen en el sotrage
+  // y se pasa la url para guardarla en la base de datos
+  async subirImagen(direccion: string, data_url: string) {
+    return uploadString(ref(getStorage(), direccion), data_url, 'data_url').then(() => {
+      // cuando se termina de subir la imagen obtenemos la URL en la que guardó
+      return getDownloadURL(ref(getStorage(), direccion))
+    })
   }
 
 }

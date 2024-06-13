@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
@@ -6,20 +7,21 @@ import { UtilsService } from 'src/app/services/utils.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent  implements OnInit {
+export class HeaderComponent implements OnInit {
 
   @Input() title!: string;
   @Input() botonVolver!: string;
   @Input() esModal!: boolean;
+  @Input() mostrarMenu!: boolean;
 
-  constructor() { }
+  constructor(private menuCtrl: MenuController) { }
 
   utilidadesServ = inject(UtilsService);
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  despedirModal() {
-    this.utilidadesServ.despedirModal()
+  cierraModal() {
+    this.utilidadesServ.cierraModal()
   }
 
 }

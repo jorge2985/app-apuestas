@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ApuestasUsuarioPageRoutingModule } from './apuestas-usuario-routing.module';
 
 import { ApuestasUsuarioPage } from './apuestas-usuario.page';
-import { CompartidosModule } from 'src/app/compartidos/compartidos.module';
+import { CompartidosModule } from '../../compartidos/compartidos.module';
 
 @NgModule({
   imports: [

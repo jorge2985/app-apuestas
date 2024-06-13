@@ -1,0 +1,25 @@
+.vacio {
+    text-align: center;
+    color: rgb(128, 128, 128);
+    margin-top: 20%;
+}
+
+ion-icon[name="cash-outline"] {
+    
+    font-size: 150px;
+}
+
+.elementos-card {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    text-align: center;
+}
+
+ion-card {
+    padding: 20px 0;
+    border-radius: 15px;
+}
+
+ion-content {
+    --padding-bottom: 70px;
+}

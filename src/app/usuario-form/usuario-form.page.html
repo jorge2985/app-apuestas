@@ -1,15 +1,32 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Datos de Usuario</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [mostrarMenu]="false" title="Perfil"></app-header>
+<app-menu></app-menu>
 
-<ion-content>
-  <form>
-    <ion-item>
-      <ion-label position="floating">Billetera Virtual</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-button expand="block">Registrarse</ion-button>
-  </form>
+<ion-content class="ion-text-center">
+  <ion-avatar>
+    <img *ngIf="usuario?.imagen" [src]="usuario?.imagen" />
+    <ion-icon class="imagen-vacia" *ngIf="!usuario?.imagen" name="person-circle-outline"></ion-icon>
+  </ion-avatar>
+
+  <ion-button class="boton-foto" (click)="tomarImagen()" shape="round">
+    <ion-icon name="camera-outline"></ion-icon>
+  </ion-button>
+
+  <h2>{{usuario.nombre}}</h2>
+  <div>Apostador</div>
+
+  <ion-item routerLink="/home" button detail>
+    <ion-icon color="primary" slot="start" name="card-outline"></ion-icon>
+    <ion-label>Cargar apuestas</ion-label>
+  </ion-item>
+
+  <ion-item routerLink="/apuestas-usuario" button detail>
+    <ion-icon color="primary" slot="start" name="wallet-outline"></ion-icon>
+    <ion-label>Ver apuestas</ion-label>
+  </ion-item>
+
+  <ion-item button detail>
+    <ion-icon color="primary" slot="start" name="document-text-outline"></ion-icon>
+    <ion-label>Legales</ion-label>
+  </ion-item>
+
 </ion-content>

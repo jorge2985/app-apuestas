@@ -16,7 +16,7 @@ export const autenticacionGuard: CanActivateFn = (route, state) => {
         if (usuario) resolve(true);
       }
       else {
-        utilsServ.linkEnrutador('/login');
+        firebaseServ.deslogueo();
         resolve(false);
       }
     })
