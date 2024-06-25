@@ -8,8 +8,6 @@ export const noAutenticadoGuard: CanActivateFn = (route, state) => {
   const firebaseServ = inject(FirebaseService)
   const utilsServ = inject(UtilsService)
 
-  let usuario = localStorage.getItem('usuario')
-
   return new Promise((resolve, reject) => {
     firebaseServ.obtenerAutenticacion().onAuthStateChanged((autenticado) => {
       if (!autenticado) resolve(true)

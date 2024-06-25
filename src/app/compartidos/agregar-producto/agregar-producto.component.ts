@@ -201,8 +201,8 @@ export class AgregarProductoComponent implements OnInit {
       idEvent: this.form.controls.idEvent.value,
       strSport: this.form.controls.strSport.value,
       strTimestamp: this.form.controls.strTimestamp.value,
-      strAwayTeam: this.esVisitante ? this.form.controls.strAwayTeam.value : this.form.controls.strHomeTeam.value,
-      strHomeTeam: this.esLocal ? this.form.controls.strHomeTeam.value : this.form.controls.strAwayTeam.value,
+      strAwayTeam: this.form.controls.strAwayTeam.value,
+      strHomeTeam: this.form.controls.strHomeTeam.value,
       importe: this.form.controls.importe.value,
       equipoSeleccionado: this.form.controls.equipoSeleccionado.value
     };

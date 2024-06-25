@@ -9,15 +9,13 @@
         <ion-list>
             <!-- LIGA -->
             <ion-item>
-                <app-custom-input [control]="form.controls.strHomeTeam" etiqueta="Equipo Local" tipo="text"
-                    [etiqueta]="local"></app-custom-input>
+                <app-custom-input [control]="form.controls.strHomeTeam" etiqueta="Equipo Local" tipo="text"></app-custom-input>
                 <ion-checkbox (ionChange)="toggleCheckbox('local')" [checked]="esLocal"></ion-checkbox>
             </ion-item>
 
             <!-- EVENT -->
             <ion-item>
-                <app-custom-input [control]="form.controls.strAwayTeam" etiqueta="Equipo visitante" tipo="text"
-                    [etiqueta]="visitante"></app-custom-input>
+                <app-custom-input [control]="form.controls.strAwayTeam" etiqueta="Equipo visitante" tipo="text"></app-custom-input>
                 <ion-checkbox (ionChange)="toggleCheckbox('visitante')" [checked]="esVisitante"></ion-checkbox>
             </ion-item>
         </ion-list>

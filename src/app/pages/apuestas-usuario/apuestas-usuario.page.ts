@@ -1,12 +1,9 @@
 import { Component, OnInit, importProvidersFrom, inject } from '@angular/core';
 import { AgregarProductoComponent } from 'src/app/compartidos/agregar-producto/agregar-producto.component';
 import { Apuesta } from 'src/app/models/apuesta.model';
-import { Usuario } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { orderBy } from 'firebase/firestore';
-import { UsuarioService } from '../../services/usuario.service';
-import { User } from 'firebase/auth';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 
 
@@ -19,7 +16,6 @@ export class ApuestasUsuarioPage implements OnInit {
 
   servicioFirebase = inject(FirebaseService);
   utilidadesServ = inject(UtilsService);
-  datoUsuario = inject(UsuarioService);
 
   uid: string | null = null;
 
@@ -49,11 +45,6 @@ export class ApuestasUsuarioPage implements OnInit {
       });
     });
   }
-
-  // Devuelve los datos del usuario guardados en el local Storage con la clave 'usuario'
-  /* usuario(): Usuario {
-    return this.utilidadesServ.obtenerDeLocalStorage('usuario');
-  } */
 
   ionViewWillEnter() {
     // Se ejecuta la función cuando se carga la visualización de la pantalla

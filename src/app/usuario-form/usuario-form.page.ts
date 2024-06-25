@@ -19,14 +19,6 @@ export class UsuarioFormPage implements OnInit {
 
   ngOnInit() {
   }
-
-  // Devuelve la URL de Firebase con los datos del usuario
-  /*
-  usuario(): Usuario {
-    return this.utilidadesServ.obtenerDeLocalStorage('usuario');
-  }
-  */
-
   
   async tomarImagen() {
 

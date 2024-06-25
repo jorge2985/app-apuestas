@@ -20,7 +20,32 @@ export class FirebaseService {
   storage = inject(AngularFireStorage);
   utilServc = inject(UtilsService);
 
+  private uid: string
+
   constructor() { }
+
+
+  async getUserId(): Promise<string | null> {
+    const auth = getAuth();
+    console.log('getUserId: verificando estado de autenticación');
+    return new Promise((resolve, reject) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.uid = user.uid;
+          console.log('getUserId: usuario autenticado', this.uid);
+          resolve(this.uid);
+        } else {
+          this.uid = null;
+          console.log('getUserId: usuario no autenticado');
+          resolve(null);
+        }
+      }, (error) => {
+        console.error('getUserId: error', error);
+        reject(error);
+      });
+    });
+  }
+  
 
   // *********** AUTENTICACIÓN ***********
 

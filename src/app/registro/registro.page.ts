@@ -78,9 +78,6 @@ export class RegistroPage implements OnInit {
       // crea un documento con los datos del usuario que se obtienen del form y la url del usuario
       this.servicioFirebase.crearDocumento(direccion, this.form.value).then(async respuesta => {
 
-        // guarda la información del usuario en el Local Storage
-        // this.servicioUtilidades.guardarEnLocalStorage('usuario', this.form.value);
-
         // redirige al usuario a la home
         this.servicioUtilidades.linkEnrutador('/home');
 

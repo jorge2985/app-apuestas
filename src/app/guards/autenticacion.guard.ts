@@ -8,12 +8,12 @@ export const autenticacionGuard: CanActivateFn = (route, state) => {
   const firebaseServ = inject(FirebaseService)
   const utilsServ = inject(UtilsService)
 
-  let usuario = localStorage.getItem('usuario')
+  // let usuario = localStorage.getItem('usuario')
 
   return new Promise((resolve, reject) => {
     firebaseServ.obtenerAutenticacion().onAuthStateChanged((autenticado) => {
       if (autenticado) {
-        if (usuario) resolve(true);
+        /* if (usuario) */ resolve(true);
       }
       else {
         firebaseServ.deslogueo();

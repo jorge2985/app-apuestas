@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
 
   // obtiene y devuelve en el home los datos de la API
   fetchEventos() {
-    const apiUrl = 'https://www.thesportsdb.com/api/v1/json/3/searchevents.php?e=&s=2023-2024'
+    const apiUrl = 'https://www.thesportsdb.com/api/v1/json/3/searchevents.php?e=&s=2024-2025'
     this.http.get(apiUrl).subscribe((data: any) => {
       const eventosFiltrados = data.event.filter(
         (evento: any) => evento.strStatus === 'Time to be defined' && evento.strSport === 'Soccer'
